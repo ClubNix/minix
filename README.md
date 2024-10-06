@@ -1,3 +1,8 @@
+install java 17 for basic servers
+```bash
+apt install openjdk-17-jdk
+```
+
 put service in /etc/systemd/system
 
 ```bash
