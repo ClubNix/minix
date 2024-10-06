@@ -1,0 +1,60 @@
+# Minecraft Server Manager - systemd service file
+# Develop by ZEN, Anemys and isnubi
+# Made by Club*Nix with <3
+
+[Unit]
+Description=Minecraft Server: %i
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/minecraft/%i
+
+# Users Database is not available from within the unit, only root and minecraft is available, everybody else is nobody
+PrivateUsers=true
+
+# Read only mapping of /usr /boot and /etc
+ProtectSystem=full
+
+# /home, /root and /run/user seem to be empty from within the unit. It is recommended to enable this setting for all long-running services (in particular network-facing ones).
+ProtectHome=true
+
+# /proc/sys, /sys, /proc/sysrq-trigger, /proc/latency_stats, /proc/acpi, /proc/timer_stats, /proc/fs and /proc/irq will be read-only within the unit. It is recommended to turn this on for most services.
+ProtectKernelTunables=true
+
+# Block module system calls, also /usr/lib/modules. It is recommended to turn this on for most services that do not need special file systems or extra kernel modules to work
+ProtectKernelModules=true
+
+# It is hence recommended to turn this on for most services
+ProtectControlGroups=true
+
+# Set default memory values
+Environment=MCMINMEM=1G
+Environment=MCMAXMEM=2G
+Environment=JAR_NAME=server.jar
+Environment=JAVA_OPTIONS=
+
+# Change memory values in environment file
+EnvironmentFile=-/opt/minecraft/%i/server.conf
+
+# User and group the process will run as
+User=minecraft
+Group=minecraft
+
+# Restart the process if it crashes after 15 seconds
+Restart=on-failure
+RestartSec=15s
+
+SuccessExitStatus=143
+
+ExecStart=/usr/bin/sh -c "/opt/minecraft/%i/java -Xms${MCMINMEM} -Xmx${MCMAXMEM} ${JAVA_OPTIONS} -jar ${JAR_NAME} --nogui"
+
+ExecReload=/usr/bin/sh -c "/opt/minecraft/bin/manage.sh -m reload -s %i"
+
+ExecStop=/usr/bin/sh -c "/opt/minecraft/bin/manage.sh -m stop -s %i"
+
+[Install]
+WantedBy=multi-user.target
+
+# Service made using https://linuxconfig.org/ubuntu-20-04-minecraft-server-setup#h1-install-prerequisites
+# Improved using https://minecraft.fandom.com/wiki/Tutorials/Server_startup_script and https://www.liquidweb.com/kb/how-to-create-a-minecraft-server/
