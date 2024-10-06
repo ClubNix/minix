@@ -3,6 +3,16 @@ install java 17 for basic servers
 apt install openjdk-17-jdk
 ```
 
+create minecraft directory
+```bash
+mkdir -p /opt/minecraft
+```
+
+create minecraft user
+```bash
+useradd minecraft -d /opt/minecraft
+```
+
 put service in /etc/systemd/system
 
 ```bash
@@ -13,9 +23,7 @@ systemctl daemon-reload
 download mcrcon [here](https://github.com/Tiiffi/mcrcon/releases/download/v0.7.2/mcrcon-0.7.2-linux-x86-64.tar.gz)
 
 ```bash
-cd /opt
-mkdir minecraft
-cd minecraft
+cd /opt/minecraft
 mkdir bin
 cd bin
 wget https://github.com/Tiiffi/mcrcon/releases/download/v0.7.2/mcrcon-0.7.2-linux-x86-64.tar.gz
