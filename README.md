@@ -56,7 +56,12 @@ ln -s /opt/minecraft/<server_name>/jdk... /opt/minecraft/<server_name>/java
 ```
 if jdk included with the server
 
-after the first launch of your server, don't forget to edit MCRCON port/password in `server.properties`
+after the first launch of your server, don't forget to edit MCRCON port/password in `server.properties` and to enable rcon
+
+```
+enable-rcon=true
+
+```
 
 change the flag in `eula.txt ` to true after the first launch
 
