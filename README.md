@@ -10,7 +10,7 @@ mkdir -p /opt/minecraft
 
 create minecraft user
 ```bash
-useradd minecraft -d /opt/minecraft
+useradd minecraft -d /opt/minecraft -s /bin/bash -p <password>
 ```
 
 put service in /etc/systemd/system
