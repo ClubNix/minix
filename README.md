@@ -58,6 +58,8 @@ if jdk included with the server
 
 after the first launch of your server, don't forget to edit MCRCON port/password in `server.properties`
 
+change the flag in `eula.txt ` to true after the first launch
+
 to start the server
 
 ```bash
