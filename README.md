@@ -2,6 +2,15 @@ install java 17 for basic servers
 ```bash
 apt install openjdk-17-jdk
 ```
+or install java 21 for latest paper
+```bash
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get install ca-certificates apt-transport-https gnupg wget
+wget -O - https://apt.corretto.aws/corretto.key | sudo gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg && \
+echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | sudo tee /etc/apt/sources.list.d/corretto.list
+sudo apt-get update
+sudo apt-get install -y java-21-amazon-corretto-jdk libxi6 libxtst6 libxrender1
+```
 
 create minecraft directory
 ```bash
@@ -43,7 +52,7 @@ create a new folder in `/opt/minecraft` with the name of your server
 
 put server.conf.template as `server.conf` in the folder you just created and edit it
 
-put your server jar/server files in the folder you just created
+put your server jar/server ([paper](https://api.papermc.io/v2/projects/paper/versions/1.21.1/builds/119/downloads/paper-1.21.1-119.jar) for exemple) files in the folder you just created
 
 don't forget to put a link to java bin in the server folder
 
